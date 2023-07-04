@@ -1,50 +1,85 @@
-#include<bits/stdc++.h>
-#define     f                 first
-#define     s                 second
-#define     pb                push_back
-#define     all(x)            x.begin(),x.end()
-#define     fi(i,a,b)         for(int i=a;i<b;i++)
-#define     ri(i,b,a)         for(int i=b;i>=a;i--)
-#define     N                 (int)(1e9 + 7)
-#define     yes               cout<<"YES\n"
-#define     no                cout<<"NO\n"
-#define     nl                "\n"
-#define     deb(x)            cerr<<(#x)<<" = "<<x<<"\n"
-#define     mod               1000000007
-#define     pr(x)             cout<<x<<"\n"
-typedef long long ll;
-typedef long double ld;
+// C++ program to implement recursive Binary Search
+#include <bits/stdc++.h>
 using namespace std;
-ll gcd (ll a, ll b) {
-    return b ? gcd (b, a % b) : a;
-}
-ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
-void solve(){
-    string s;
-    cin>>s;
-    ll sum=0;
-    int s1 = (int)s[0]-'a';
-    int s2 = (int)s[1]-'a';
-    if(s[0]<s[1]){
-        sum=(s1*25) +(s2);
-    }
-    else{
-        sum=(s1*25) +(s2+1);
-    }
-    pr(sum);
 
-}
+void merge(int arr[], int l, int m, int r) {
+  int i = l;
+  int j = m + 1;
+  int k = l;
 
-int main(){
-    ios_base::sync_with_stdio(0);cin.tie(0);
-    int t;
-    cin>>t;
-    while(t--){
-        solve();
+  /* create temp array */
+  int temp[5];
+
+  while (i <= m && j <= r) {
+    if (arr[i] <= arr[j]) {
+      temp[k] = arr[i];
+      i++;
+      k++;
+    } else {
+      temp[k] = arr[j];
+      j++;
+      k++;
     }
 
+  }
+
+  /* Copy the remaining elements of first half, if there are any */
+  while (i <= m) {
+    temp[k] = arr[i];
+    i++;
+    k++;
+
+  }
+
+  /* Copy the remaining elements of second half, if there are any */
+  while (j <= r) {
+    temp[k] = arr[j];
+    j++;
+    k++;
+  }
+
+  /* Copy the temp array to original array */
+  for (int p = l; p <= r; p++) {
+    arr[p] = temp[p];
+  }
 }
 
+/* l is for left index and r is right index of the
+   sub-array of arr to be sorted */
+void mergeSort(int arr[], int l, int r) {
+  if (l < r) {
+    // find midpoint
+    int m = (l + r) / 2;
 
+    // recurcive mergesort first and second halves
+    mergeSort(arr, l, m);
+    mergeSort(arr, m + 1, r);
 
+    // merge
+    merge(arr, l, m, r);
+  }
+}
 
+int main() {
+  int myarray[5];
+  //int arr_size = sizeof(myarray)/sizeof(myarray[0]);
+  int arr_size = 5;
+
+  cout << "Enter 5 integers in any order: " << endl;
+  for (int i = 0; i < 5; i++) {
+    cin >> myarray[i];
+  }
+  cout << "Before Sorting" << endl;
+  for (int i = 0; i < 5; i++) {
+    cout << myarray[i] << " ";
+  }
+  cout << endl;
+  mergeSort(myarray, 0, (arr_size - 1)); // mergesort(arr,left,right) called
+
+  cout << "After Sorting" << endl;
+  for (int i = 0; i < 5; i++) {
+    cout << myarray[i] << " ";
+  }
+
+  return 0;
+}

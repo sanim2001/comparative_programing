@@ -1,6 +1,4 @@
 #include<bits/stdc++.h>
-#define     f                 first
-#define     s                 second
 #define     pb                push_back
 #define     all(x)            x.begin(),x.end()
 #define     fi(i,a,b)         for(int i=a;i<b;i++)
@@ -15,10 +13,10 @@
 typedef long long ll;
 typedef long double ld;
 using namespace std;
-ll gcd (ll a, ll b) {
-    return b ? gcd (b, a % b) : a;
-}
+ll gcd (ll a, ll b) { return b ? gcd (b, a % b) : a;}
 ll lcm(ll a, ll b){return (a/gcd(a,b)*b);}
+//transform(s.begin(), s.end(), s.begin(), ::tolower);
+
 void solve(){
 
 }
