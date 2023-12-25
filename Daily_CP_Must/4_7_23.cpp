@@ -24,12 +24,36 @@ ll gcd(ll a,ll b){
 }
 
 void solve(){
-    int n;
+    int n,f=0,ans;
     cin>>n;
-    int a[n];
-    fi(i,0,n)cin>>a[i];
-    int mn =  min_element(a,a+n)-a;
-
+    if(n<24){
+        no;
+        return;
+    }
+    int i,j;
+    for(i =2;i*i*i<=n; i++){
+        if(n%i==0){
+            break;
+        }
+    }
+    ans = n/i;
+    for(j=i+1; j*j<=ans; j++){
+        if(ans%j==0){
+            f=ans/j;
+            if(j>=f){
+                no;
+                return;
+            }
+            break;
+        }
+    }
+    if(i*j*f==n){
+        yes;
+        cout<<i<<" "<<j<<" "<<f<<nl;
+    }
+    else{
+        no;
+    }
 }
 
 int main(){

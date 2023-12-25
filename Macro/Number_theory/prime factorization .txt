@@ -1,0 +1,18 @@
+void primeFactors(int num) {
+  vector<int> factors;
+  while(num % 2 == 0) {
+    factors.push_back(2);
+    num /= 2;
+  }
+
+  for(int i = 3; i * i <= num; i += 2) {
+    while(num % i == 0) {
+      factors.push_back(num);
+      num /= i;
+    }
+  }
+
+  if(num > 1) factors.push_back(num);
+
+  for(auto x : factors) cout << x << " ";
+}
